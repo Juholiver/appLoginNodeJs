@@ -27,6 +27,7 @@ const connectDB = async () => {
 }
 connectDB();
 
+//Create User
 app.post('/cadastro', async (req, res) => {
 
   try {
@@ -38,8 +39,15 @@ app.post('/cadastro', async (req, res) => {
 
 });
 
-app.get('/', (req, res) => {
-  
+
+//Get Users
+app.get('/usuarios', async (req, res) => {
+  try {
+    const usuarios = await User.find();
+    res.json(usuarios);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 app.listen(PORT, () => {
