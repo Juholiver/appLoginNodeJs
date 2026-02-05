@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import User from './User.js';
 
 dotenv.config();
 
@@ -22,7 +23,9 @@ const connectDB = async () => {
 }
 connectDB();
 
+app.post('/cadastro', (req, res) => {
 
+});
 
 app.get('/', (req, res) => {
   
