@@ -50,6 +50,20 @@ app.get('/usuarios', async (req, res) => {
   }
 });
 
+
+//update Users
+app.put('/usuarios/:id', async (req, res) => {
+  try {
+    const usuarioAtualizado = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!usuarioAtualizado) {
+      return res.status(404).json({ error: 'Usuário não encontrado' });
+    }
+    res.json(usuarioAtualizado);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
