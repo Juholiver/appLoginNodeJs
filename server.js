@@ -27,6 +27,24 @@ const connectDB = async () => {
 }
 connectDB();
 
+app.post('/login', async (req, res) => {
+
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    return res.status(404).json({ message: 'Usuário não encontrado' });
+  }
+
+  if (user.password !== password) {
+    return res.status(401).json({ message: 'Senha inválida' });
+  }
+
+  res.json({ message: 'Login OK', user });
+
+});
+
 //Create User
 app.post('/cadastro', async (req, res) => {
 
